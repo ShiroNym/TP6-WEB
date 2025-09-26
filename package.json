@@ -1,0 +1,28 @@
+{
+  "name": "package",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "http-dev": "cross-env NODE_ENV=development nodemon server-http.mjs",
+    "http-prod": "cross-env NODE_ENV=production nodemon server-http.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ShiroNym/TP6-WEB.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ShiroNym/TP6-WEB/issues"
+  },
+  "homepage": "https://github.com/ShiroNym/TP6-WEB#readme",
+  "dependencies": {
+    "dotenv": "^17.2.2",
+    "express": "^5.1.0",
+    "httpie": "^1.1.2",
+    "sqlite3": "^5.1.7",
+    "swagger-ui": "^5.29.0"
+  }
+}
