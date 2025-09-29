@@ -20,9 +20,11 @@
   "homepage": "https://github.com/ShiroNym/TP6-WEB#readme",
   "dependencies": {
     "dotenv": "^17.2.2",
+    "ejs": "^3.1.10",
     "express": "^5.1.0",
     "httpie": "^1.1.2",
     "sqlite3": "^5.1.7",
-    "swagger-ui": "^5.29.0"
+    "swagger-ui": "^5.29.0",
+    "swagger-ui-express": "^5.0.1"
   }
 }

@@ -1,0 +1,116 @@
+openapi: 3.0.0
+info:
+  title: API TP6-WEB
+  description: Documentation interactive des API V1 et V2
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080/api-v1
+    description: API V1
+  - url: http://localhost:8080/api-v2
+    description: API V2
+paths:
+  /:
+    get:
+      summary: Liste des liens
+      description: Retourne la liste des liens enregistrés (V1) ou le nombre de liens (V2)
+      responses:
+        '200':
+          description: Succès
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - type: array
+                    items:
+                      $ref: '#/components/schemas/Link'
+                  - type: object
+                    properties:
+                      count:
+                        type: integer
+            text/html:
+              schema:
+                type: string
+    post:
+      summary: Ajouter un lien
+      description: Ajoute un nouveau lien
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                url:
+                  type: string
+      responses:
+        '201':
+          description: Lien créé
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Link'
+            text/html:
+              schema:
+                type: string
+        '200':
+          description: Doublon (V2)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Link'
+    delete:
+      summary: Effacer tous les liens
+      description: Supprime tous les liens (V2)
+      responses:
+        '200':
+          description: Succès
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+            text/html:
+              schema:
+                type: string
+  /{short}:
+    get:
+      summary: Obtenir un lien raccourci
+      description: Retourne les infos du lien ou redirige (V2)
+      parameters:
+        - name: short
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Succès
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Link'
+            text/html:
+              schema:
+                type: string
+        '404':
+          description: Lien non trouvé
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+components:
+  schemas:
+    Link:
+      type: object
+      properties:
+        short:
+          type: string
+        url:
+          type: string
+        shortUrl:
+          type: string

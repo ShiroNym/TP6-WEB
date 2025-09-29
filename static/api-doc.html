@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Documentation API TP6-WEB</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Documentation des API V1 et V2</h1>
+    <h2>API V1</h2>
+    <ul>
+      <li><strong>GET /api-v1/</strong> : Retourne la liste des liens enregistrés (JSON).</li>
+      <li><strong>POST /api-v1/</strong> : Ajoute un nouveau lien. Body JSON : <code>{ url: "https://..." }</code>. Retourne le lien créé (JSON).</li>
+    </ul>
+    <h2>API V2</h2>
+    <ul>
+      <li><strong>GET /api-v2/</strong> :
+        <ul>
+          <li>En JSON : Retourne le nombre de liens (<code>{ count: ... }</code>).</li>
+          <li>En HTML : Affiche la page d’accueil (formulaire de création).</li>
+        </ul>
+      </li>
+      <li><strong>POST /api-v2/</strong> :
+        <ul>
+          <li>En JSON : Ajoute un lien, retourne l’URL raccourcie (<code>{ shortUrl: ... }</code>). Si doublon, retourne l’URL existante.</li>
+          <li>En HTML : Affiche la page avec le lien créé.</li>
+        </ul>
+      </li>
+      <li><strong>GET /api-v2/:short</strong> :
+        <ul>
+          <li>En JSON : Retourne les infos du lien (<code>{ short, url, shortUrl }</code>).</li>
+          <li>En HTML : Redirige vers l’URL d’origine.</li>
+        </ul>
+      </li>
+      <li><strong>DELETE /api-v2/</strong> :
+        <ul>
+          <li>En JSON : Efface tous les liens (<code>{ success: true }</code>).</li>
+          <li>En HTML : Affiche un message de confirmation.</li>
+        </ul>
+      </li>
+    </ul>
+    <h2>Exemples de requêtes</h2>
+    <ul>
+      <li><strong>Ajouter un lien (POST)</strong> : <code>http POST http://localhost:8080/api-v2/ url="https://exemple.com"</code></li>
+      <li><strong>Obtenir un lien raccourci (GET)</strong> : <code>http http://localhost:8080/api-v2/g6gj5S</code></li>
+      <li><strong>Effacer tous les liens (DELETE)</strong> : <code>http DELETE http://localhost:8080/api-v2/</code></li>
+    </ul>
+    <h2>Notes</h2>
+    <ul>
+      <li>Les échanges se font en JSON pour le client SPA.</li>
+      <li>La négociation de contenu se fait via l’en-tête <code>Accept</code> (JSON ou HTML).</li>
+      <li>La redirection fonctionne uniquement en HTML (navigateur).</li>
+    </ul>
+  </div>
+</body>
+</html>
