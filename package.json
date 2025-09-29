@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/ShiroNym/TP6-WEB#readme",
   "dependencies": {
+    "cross-env": "^10.0.0",
     "dotenv": "^17.2.2",
     "ejs": "^3.1.10",
     "express": "^5.1.0",
