@@ -4,16 +4,18 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TP6-WEB</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css">
   <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
   <div class="container">
-    <h1>Réducteur d’URL</h1>
+    <h1 class="title is-2">Réducteur d’URL</h1>
+    
     <form id="add-link-form">
-      <input type="url" id="url-input" placeholder="Ajouter un lien (https://...)" required>
-      <button type="submit">Ajouter</button>
+      <input class="input  has-background-grey-light  type="url" id="url-input" placeholder="Ajouter un lien (https://...)" required>
+      <button class="button is-link is-dark  " type="submit">Ajouter</button>
     </form>
-    <button id="delete-all-btn" style="margin-top:16px">Effacer tous les liens</button>
+    <button class="button is-danger is-dark" id="delete-all-btn" style="margin-top:16px">Effacer tous les liens</button>
     <div id="result"></div>
   </div>
   <script src="/static/app.js"></script>

@@ -1,7 +1,7 @@
 body { 
     font-family: Arial, 
     sans-serif; 
-    background: #f7f7f7;
+   
     margin: 0; 
     padding: 0; 
 }
@@ -9,7 +9,7 @@ body {
 .container { 
     max-width: 600px; 
     margin: 40px auto; 
-    background: #f7f7f7; 
+    background-color: #121214;
     border-radius: 8px; 
     padding: 32px; 
 }
@@ -17,7 +17,7 @@ body {
 
 h1 {
     text-align: center;
-    color: #2c3e50;
+    
 }
 
 
@@ -36,12 +36,13 @@ input[type="url"] {
 
 
 button { 
-    padding: 8px 16px;
-    border: none;
-    background: #2980b9;
+    padding: 7px 15px;
+    border: 0.8px solid;
+    background-color: #274684;
     color: #fff;
     border-radius: 4px;
     cursor: pointer; 
+    
 }
 
 
@@ -72,3 +73,14 @@ li {
     color: #888;
 }
 
+
+
+html{
+    background-color: rgb(18, 18, 20);
+}
+
+#url-input{
+    
+    color: white;
+    
+}

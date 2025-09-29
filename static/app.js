@@ -39,7 +39,7 @@ form.addEventListener('submit', async (e) => {
     }
     const link = await res.json();
     const shortUrl = link.shortUrl;
-    resultDiv.innerHTML = `Lien généré : <a href="${shortUrl}" target="_blank">${shortUrl}</a> <button id="copy-btn">Copier l'URL</button>`;
+    resultDiv.innerHTML = `<br><span class="title is-6">Lien généré : </span><a href="${shortUrl}" target="_blank">${shortUrl}</a> <br><br><button class="button is-success is-dark" id="copy-btn">Copier l'URL</button>`;
     document.getElementById('copy-btn').onclick = () => {
       navigator.clipboard.writeText(shortUrl);
     };
