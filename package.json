@@ -27,5 +27,8 @@
     "sqlite3": "^5.1.7",
     "swagger-ui": "^5.29.0",
     "swagger-ui-express": "^5.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
   }
 }
