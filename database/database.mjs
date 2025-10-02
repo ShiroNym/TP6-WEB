@@ -6,7 +6,8 @@ const db = new sqlite3.Database(DB_FILE);
 db.run(`CREATE TABLE IF NOT EXISTS links (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   url TEXT UNIQUE NOT NULL,
-  short TEXT UNIQUE NOT NULL
+  short TEXT UNIQUE NOT NULL,
+  secret TEXT NOT NULL
 )`);
 
 export function getAllLinks(callback) {
@@ -17,17 +18,18 @@ export function addLink(url, callback) {
   db.get('SELECT * FROM links WHERE url = ?', [url], (err, row) => {
     if (err) return callback(err);
     if (row) {
-      callback(null, row, true);
+      callback(null, { short: row.short, url: row.url, shortUrl: row.shortUrl }, true);
       return;
     }
     function tryInsert() {
       const short = generateShortId();
-      db.run('INSERT INTO links (url, short) VALUES (?, ?)', [url, short], function(err) {
+      const secret = generateShortId();
+      db.run('INSERT INTO links (url, short, secret) VALUES (?, ?, ?)', [url, short, secret], function(err) {
         if (err && err.code === 'SQLITE_CONSTRAINT') {
           tryInsert();
         } else if (!err) {
           db.get('SELECT * FROM links WHERE url = ?', [url], (getErr, row) => {
-            callback(getErr, row, false);
+            callback(getErr, { short: row.short, url: row.url, shortUrl: row.shortUrl, secret: row.secret }, false);
           });
         } else {
           callback(err, null, false);
@@ -37,6 +39,20 @@ export function addLink(url, callback) {
     tryInsert();
   });
 }
+
+export function deleteLinkByShortAndSecret(short, secret, callback) {
+  db.get('SELECT * FROM links WHERE short = ?', [short], (err, link) => {
+    if (err) return callback(err);
+    if (!link) return callback(null, null, 'notfound');
+    if (!secret) return callback(null, link, 'unauthorized');
+    if (link.secret !== secret) return callback(null, link, 'forbidden');
+    db.run('DELETE FROM links WHERE short = ?', [short], (delErr) => {
+      if (delErr) return callback(delErr);
+      callback(null, link, 'deleted');
+    });
+  });
+}
+
 
 export function deleteAllLinks(callback) {
   db.run('DELETE FROM links', callback);

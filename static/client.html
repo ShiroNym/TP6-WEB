@@ -12,11 +12,27 @@
     <h1 class="title is-2">Réducteur d’URL</h1>
     
     <form id="add-link-form">
-      <input class="input  has-background-grey-light  type="url" id="url-input" placeholder="Ajouter un lien (https://...)" required>
+      <input class="input  has-background-dark-light" type="url" id="url-input" placeholder="Ajouter un lien (https://...)" required>
       <button class="button is-link is-dark  " type="submit">Ajouter</button>
     </form>
     <button class="button is-danger is-dark" id="delete-all-btn" style="margin-top:16px">Effacer tous les liens</button>
     <div id="result"></div>
+
+    <div class="container">
+      <h2 class="subtitle is-4">Supprimer un lien raccourci</h2>
+      <form id="delete-link-form">
+        <div class="field">
+          <label class="label" for="short-input">Code raccourci</label>
+          <input class="input  has-background-dark-light" type="text" id="short-input" placeholder="Code du lien (ex: HdPWk7)" required>
+        </div>
+        <div class="field">
+          <label class="label" for="secret-input">Code secret</label>
+          <input class="input  has-background-dark-light" type="text" id="secret-input" placeholder="Code secret (ex: RatQak)" required>
+        </div>
+        <button class="button is-danger is-dark" type="submit">Supprimer</button>
+      </form>
+      <div id="delete-result"></div>
+    </div>
   </div>
   <script src="/static/app.js"></script>
 </body>

@@ -38,16 +38,25 @@ npm run dev
 
 
 ## Fonctionnalités principales
-- **Raccourcissement d’URL** : Génération de liens courts (6 caractères).
+- **Raccourcissement d’URL** : Génération de liens courts (6 caractères) avec un code secret associé à chaque lien.
 - **Gestion des doublons** : Un même lien n’est jamais ajouté deux fois.
 - **Suppression globale** : Bouton pour effacer tous les liens.
+- **Suppression sécurisée d’un lien** :
+  - Chaque lien possède un code secret généré à la création.
+  - Une section dédiée dans le front permet de supprimer un lien en saisissant son code raccourci et son code secret.
+  - La route DELETE `/api-v2/:short` nécessite l’en-tête `X-API-KEY` contenant le code secret.
+  - Seul l’auteur (possédant le code secret) peut supprimer le lien.
 - **API REST** :
   - v1 : GET/POST basiques
-  - v2 : Content negotiation (JSON/HTML), short URL, suppression globale
-- **SPA client** : Ajout, affichage, copie dans le presse-papier, suppression de tous les liens.
-- **Documentation interactive** : Swagger UI disponible sur `/api-docs`
+  - v2 : Content negotiation (JSON/HTML), short URL, suppression globale, suppression sécurisée par clé API
+- **SPA client** : Ajout, affichage, copie dans le presse-papier, suppression de tous les liens, suppression individuelle par code secret.
+- **Documentation interactive** : Swagger UI disponible sur `/api-docs` avec gestion de l’authentification par clé API (champ sécurisé pour la suppression).
 
 ## Documentation API
 - Swagger UI : [http://localhost:8080/api-docs](http://localhost:8080/api-docs)
 - Spécification OpenAPI : `static/open-api.yaml`
+- Suppression sécurisée :
+  - Route : `DELETE /api-v2/{short}`
+  - Authentification : en-tête `X-API-KEY` (code secret)
+  - Codes de réponse : 200 (succès), 401 (clé manquante), 403 (clé incorrecte), 404 (lien non trouvé)
 
